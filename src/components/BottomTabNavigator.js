@@ -1,9 +1,14 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import WorkoutsScreen from '../screens/WorkoutsScreen';
+
+
+const TabIcon = ({ color, size, iconName }) => {
+	return <FontAwesome5 name={iconName} size={size} color={color} />;
+};
 
 const BottomTab = createBottomTabNavigator();
 
@@ -12,7 +17,7 @@ const BottomTabNavigator = () => {
 		<BottomTab.Navigator
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ color, size }) => {
-					let iconName;
+					let iconName = 'home'; // default icon
 					if (route.name === 'Home') {
 						iconName = 'home';
 					} else if (route.name === 'Workouts') {
@@ -21,10 +26,10 @@ const BottomTabNavigator = () => {
 						iconName = 'cog';
 					}
 					return (
-						<MaterialCommunityIcons
-							name={iconName}
-							size={size}
+						<TabIcon
 							color={color}
+							size={size}
+							iconName={iconName}
 						/>
 					);
 				},

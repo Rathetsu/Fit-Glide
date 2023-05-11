@@ -10,7 +10,7 @@ const HomeScreen = () => {
 			<Text style={styles.title}>HIIT Workout App</Text>
 			<TouchableOpacity
 				style={styles.button}
-				onPress={() => navigation.navigate('Preview')}>
+				onPress={() => navigation.navigate('Workouts')}>
 				<Text style={styles.buttonText}>Preview Workout</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
