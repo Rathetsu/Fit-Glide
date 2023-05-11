@@ -9,12 +9,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigator from './src/components/BottomTabNavigator';
 
-export type RootStackParamList = {
-	Home: undefined;
-	Circuit: undefined;
-	Preview: undefined;
-};
-
 const App = () => {
 	return (
 		<NavigationContainer>
