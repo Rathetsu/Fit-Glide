@@ -3,25 +3,15 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import WorkoutCard from '../components/WorkoutCard';
 import WorkoutModal from '../components/WorkoutModal';
 import { COLORS } from '../constants/theme';
+import workouts from '../data/workouts';
 
-// Sample data
-const workouts = [
-	{
-		id: '1',
-		name: 'Push Ups',
-		image: require('../assets/images/push_ups.png'),
-		gif: require('../assets/gifs/push_ups.gif'),
-		description: 'A push-up is a common calisthenics exercise...',
-	},
-	// more...
-];
 
 const WorkoutsScreen = () => {
 	const [modalVisible, setModalVisible] = useState(false);
-	const [selectedExercise, setSelectedExercise] = useState(null);
+	const [selectedWorkout, setselectedWorkout] = useState(null);
 
 	const handleCardPress = (exercise) => {
-		setSelectedExercise(exercise);
+		setselectedWorkout(exercise);
 		setModalVisible(true);
 	};
 
@@ -31,14 +21,14 @@ const WorkoutsScreen = () => {
 				data={workouts}
 				keyExtractor={(item) => item.id}
 				renderItem={({ item }) => (
-					<WorkoutCard exercise={item} onPress={() => handleCardPress(item)} />
+					<WorkoutCard workout={item} onPress={() => handleCardPress(item)} />
 				)}
 			/>
-			{selectedExercise && (
+			{selectedWorkout && (
 				<WorkoutModal
 					visible={modalVisible}
 					onClose={() => setModalVisible(false)}
-					exercise={selectedExercise}
+					workout={selectedWorkout}
 				/>
 			)}
 		</View>
