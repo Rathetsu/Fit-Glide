@@ -1,14 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, FlatList, StyleSheet } from 'react-native';
+import WorkoutCard from '../components/WorkoutCard';
+import WorkoutModal from '../components/WorkoutModal';
+import { COLORS } from '../constants/theme';
+
+// Sample data
+const workouts = [
+	{
+		id: '1',
+		name: 'Push Ups',
+		image: require('../assets/images/push_ups.png'),
+		gif: require('../assets/gifs/push_ups.gif'),
+		description: 'A push-up is a common calisthenics exercise...',
+	},
+	// more...
+];
 
 const WorkoutsScreen = () => {
-	const navigation = useNavigation();
+	const [modalVisible, setModalVisible] = useState(false);
+	const [selectedExercise, setSelectedExercise] = useState(null);
+
+	const handleCardPress = (exercise) => {
+		setSelectedExercise(exercise);
+		setModalVisible(true);
+	};
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Workouts</Text>
-			<Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+			<FlatList
+				data={workouts}
+				keyExtractor={(item) => item.id}
+				renderItem={({ item }) => (
+					<WorkoutCard exercise={item} onPress={() => handleCardPress(item)} />
+				)}
+			/>
+			{selectedExercise && (
+				<WorkoutModal
+					visible={modalVisible}
+					onClose={() => setModalVisible(false)}
+					exercise={selectedExercise}
+				/>
+			)}
 		</View>
 	);
 };
@@ -16,12 +48,8 @@ const WorkoutsScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: 'bold',
+		backgroundColor: COLORS.background,
+		padding: 10,
 	},
 });
 
