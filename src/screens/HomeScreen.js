@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import GradientButton from '../components/GradientButton';
+import { COLORS } from '../constants/theme';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -8,16 +10,20 @@ const HomeScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>HIIT Workout App</Text>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => navigation.navigate('Workouts')}>
-				<Text style={styles.buttonText}>Preview Workout</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => navigation.navigate('Circuit')}>
-				<Text style={styles.buttonText}>Start Workout</Text>
-			</TouchableOpacity>
+			<GradientButton
+				text="Preview Workout"
+				onPress={() => navigation.navigate('Workouts')}
+				containerStyle={styles.buttonContainer}
+				buttonStyle={styles.button}
+				textStyle={styles.buttonText}
+			/>
+			<GradientButton
+				text="Start Workout"
+				onPress={() => navigation.navigate('Circuit')}
+				containerStyle={styles.buttonContainer}
+				buttonStyle={styles.button}
+				textStyle={styles.buttonText}
+			/>
 		</View>
 	);
 };
@@ -27,22 +33,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: COLORS.background,
 	},
 	title: {
-		fontSize: 32,
+		fontSize: 36,
 		fontWeight: 'bold',
 		marginBottom: 40,
+		color: COLORS.primary,
+		textShadowColor: COLORS.borderColor,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
-	button: {
-		backgroundColor: '#1E90FF',
-		paddingVertical: 15,
-		paddingHorizontal: 30,
-		borderRadius: 5,
+	buttonContainer: {
 		marginVertical: 10,
 	},
+	button: {
+		paddingHorizontal: 30,
+		paddingVertical: 15,
+		borderRadius: 100,
+		alignItems: 'center',
+	},
 	buttonText: {
-		color: '#FFFFFF',
+		color: COLORS.base,
 		fontSize: 18,
 		fontWeight: 'bold',
 	},
